@@ -1,0 +1,11 @@
+---
+- hosts: "vms"
+  become: true
+  tasks:
+    - name: ping_serv
+      ping:
+  roles:
+  - soft
+  - docker
+  - create_sudo_user
+  - delete_user

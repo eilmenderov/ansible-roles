@@ -1,0 +1,40 @@
+---
+# install
+  - name: create user {{ USERNAME }}
+    ansible.builtin.user:
+      name: "{{ USERNAME }}"
+      home: "/home/{{ USERNAME }}"
+      groups: sudo
+
+  - name: create workdir
+    ansible.builtin.file:
+      path: "/home/{{ USERNAME }}/.ssh"
+      state: directory
+      owner: "{{ USERNAME }}"
+      group: "{{ USERNAME }}"
+      mode: '0744'
+
+  - name: "Adding existing user to group sudo"
+    user:
+      name: "{{ USERNAME }}"
+      groups: sudo
+      append: yes
+
+  - name: "Allow command withou password"
+    community.general.sudoers:
+      name: "{{ USERNAME }}"
+      user: "{{ USERNAME }}"
+      commands:
+        - ALL
+      nopassword: true
+
+  - name: add key
+    copy:
+      dest: "/home/{{ USERNAME }}/.ssh/authorized_keys"
+      owner: "{{ USERNAME }}"
+      group: "{{ USERNAME }}"
+      mode: '0600'
+      content: |
+        {{ SSH_KEY }}
+...
+

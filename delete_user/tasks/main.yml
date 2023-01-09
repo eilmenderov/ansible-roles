@@ -1,0 +1,14 @@
+---
+# install
+  - name: remove the user
+    ansible.builtin.user:
+      name: "{{ USERNAME }}"
+      state: absent
+      remove: yes
+
+  - name: remove files
+    ansible.builtin.file:
+      path: "/etc/sudoers.d/{{ USERNAME }}"
+      state: absent
+...
+

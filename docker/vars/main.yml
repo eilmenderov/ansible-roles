@@ -1,0 +1,7 @@
+---
+# vars file for create_service
+    CTOP_VERSION: "0.7.3"
+    DOCKER_COMPOSE_VERSION: "1.29.2"
+    DOCKER_PACKAGES:
+                    - curl
+...
