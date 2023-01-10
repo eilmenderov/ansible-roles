@@ -4,6 +4,10 @@
   tasks:
     - name: ping_serv
       ping:
+
+    - name: some_script
+      ansible.builtin.shell: |
+        echo 123
   roles:
   - soft
   - docker
